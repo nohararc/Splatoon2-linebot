@@ -9,11 +9,24 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+import sys
+import os
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('dI1mDsEwhTMV8F4SadBPlSyxtW+OQiWeK3XYzty/sGx1gn0Ihx81PmtGa6wugH/17M3xgom+0Dy/708CEkUb0ohhgXqxJE1kbRP1K5kjig+1aEwDfxhh9ZvbhFF9IX3X7fUlXYEPePEzQmk3BH1CxwdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('b700b14f01a738fea4fc22c8f29c175d')
+# 環境変数からchannel_secret・channel_access_tokenを取得
+channel_secret = os.environ['LINE_CHANNEL_SECRET']
+channel_access_token = os.environ['LINE_CHANNEL_ACCESS_TOKEN']
+
+if channel_secret is None:
+    print('Specify LINE_CHANNEL_SECRET as environment variable.')
+    sys.exit(1)
+if channel_access_token is None:
+    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+    sys.exit(1)
+
+line_bot_api = LineBotApi(channel_access_token)
+handler = WebhookHandler(channel_secret)
 
 @app.route("/")
 def hello_world():
