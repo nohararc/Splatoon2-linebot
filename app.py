@@ -67,7 +67,7 @@ def handle_message(event):
             the_next_one = response_json["result"][2:]
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="{0} ～ {1}".format(now["start"], now["end"])))
+            TextSendMessage(text="{0} : {1} ～ {2}".format(now["stage"]["name"], now["start"], now["end"])))
     else:
         line_bot_api.reply_message(
             event.reply_token,
