@@ -11,6 +11,8 @@ from linebot.models import (
 )
 import sys
 import os
+import urllib.request
+import json
 
 app = Flask(__name__)
 
@@ -52,9 +54,24 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage("は？"))
+    text = event.message.text
+
+    if text == 'サーモンラン':
+        req = urllib.request.Request("https://spla2.yuu26.com/coop/schedule")
+        req.add_header("user-agent", "@nohararc")
+        with urllib.request.urlopen(req) as res:
+            response_body = res.read().decode("utf-8")
+            response_json = json.loads(response_body.split("\n")[0])
+            now = response_json["result"][0]
+            the_next = response_json["result"][1]
+            the_next_one = response_json["result"][2:]
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="{0} ～ {1}".format(now["start"], now["end"])))
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="は？"))
 
 
 if __name__ == "__main__":
