@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from flask import Flask, request, abort
 
 from linebot import (
@@ -35,8 +36,14 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
+
+weapons = {"スプラシューターコラボ": {"sub": "スプラッシュボム", "special": "ジェットパック"}, ".52ガロン": {"sub": "ポイントセンサー", "special": "イカスフィア"}, "わかばシューター": {"sub": "スプラッシュボム", "special": "インクアーマー"}, "シャープマーカー": {"sub": "ポイズンミスト", "special": "ジェットパック"}, "N-ZAP85": {"sub": "キューバンボム", "special": "インクアーマー"}, "プライムシューター": {"sub": "ポイントセンサー", "special": "アメフラシ"}, "ボールドマーカー": {"sub": "カーリングボム", "special": "スーパーチャクチ"}, "プロモデラーRG": {"sub": "スプリンクラー", "special": "イカスフィア"}, "スプラシューター": {"sub": "クイックボム", "special": "スーパーチャクチ"}, "ジェットスイーパーカスタム": {"sub": "クイックボム", "special": "ハイパープレッサー"}, "プライムシューターコラボ": {"sub": "キューバンボム", "special": "バブルランチャー"}, "もみじシューター": {"sub": "ロボットボム", "special": "アメフラシ"}, "プロモデラーMG": {"sub": "キューバンボム", "special": "カーリングボムピッチャー"}, ".96ガロン": {"sub": "スプリンクラー", "special": "インクアーマー"}, "ヒーローシューターレプリカ": {"sub": "クイックボム", "special": "スーパーチャクチ"}, "L3リールガン": {"sub": "カーリングボム", "special": "イカスフィア"}, "ジェットスイーパー": {"sub": "ポイズンミスト", "special": "マルチミサイル"}, "H3リールガン": {"sub": "ポイントセンサー", "special": "マルチミサイル"}, "デュアルスイーパー": {"sub": "ポイントセンサー", "special": "マルチミサイル"}, "スプラマニューバー": {"sub": "クイックボム", "special": "マルチミサイル"}, "スプラマニューバーコラボ": {"sub": "カーリングボム", "special": "ジェットパック"}, "スパッタリー": {"sub": "ビーコン", "special": "キューバンボムピッチャー"}, "ヒーローマニューバーレプリカ": {"sub": "クイックボム", "special": "マルチミサイル"}, "スプラスコープ": {"sub": "スプラッシュボム", "special": "ハイパープレッサー"}, "スクイックリンα": {"sub": "ポイントセンサー", "special": "インクアーマー"}, "スプラチャージャー": {"sub": "スプラッシュボム", "special": "ハイパープレッサー"}, "14式竹筒銃・甲": {"sub": "カーリングボム", "special": "マルチミサイル"}, "ヒーローチャージャーレプリカ": {"sub": "スプラッシュボム", "special": "ハイパープレッサー"}, "ソイチューバー": {"sub": "キューバンボム", "special": "スーパーチャクチ"}, "スプラチャージャーコラボ": {"sub": "シールド", "special": "キューバンボムピッチャー"}, "スプラスコープコラボ": {"sub": "シールド", "special": "キューバンボムピッチャー"}, "リッター4K": {"sub": "トラップ", "special": "アメフラシ"}, "4Kスコープ": {"sub": "トラップ", "special": "アメフラシ"},
+           "リッター4kカスタム": {"sub": "ビーコン", "special": "バブルランチャー"}, "4kスコープカスタム": {"sub": "ビーコン", "special": "バブルランチャー"}, "ホットブラスターカスタム": {"sub": "ロボットボム", "special": "ジェットパック"}, "ノヴァブラスター": {"sub": "スプラッシュボム", "special": "イカスフィア"}, "ラピッドブラスター": {"sub": "トラップ", "special": "スプラッシュボムピッチャー"}, "ホットブラスター": {"sub": "ポイズンミスト", "special": "スーパーチャクチ"}, "Rブラスターエリート": {"sub": "ポイズンミスト", "special": "アメフラシ"}, "ロングブラスター": {"sub": "キューバンボム", "special": "アメフラシ"}, "クラッシュブラスター": {"sub": "スプラッシュボム", "special": "ハイパープレッサー"}, "ヒーローブラスターレプリカ": {"sub": "ポイズンミスト", "special": "スーパーチャクチ"}, "ダイナモローラー": {"sub": "トラップ", "special": "ハイパープレッサー"}, "スプラローラーコラボ": {"sub": "ビーコン", "special": "イカスフィア"}, "カーボンローラー": {"sub": "ロボットボム", "special": "アメフラシ"}, "ダイナモローラーテスラ": {"sub": "スプラッシュボム", "special": "インクアーマー"}, "スプラローラー": {"sub": "カーリングボム", "special": "スーパーチャクチ"}, "ヒーローローラーレプリカ": {"sub": "カーリングボム", "special": "スーパーチャクチ"}, "ヴァリアブルローラー": {"sub": "シールド", "special": "スプラッシュボムピッチャー"}, "ヴァリアブルローラーフォイル": {"sub": "キューバンボム", "special": "マルチミサイル"}, "ホクサイ": {"sub": "ロボットボム", "special": "ジェットパック"}, "パブロ": {"sub": "スプラッシュボム", "special": "スーパーチャクチ"}, "パブロ・ヒュー": {"sub": "トラップ", "special": "イカスフィア"}, "ヒーローブラシレプリカ": {"sub": "ロボットボム", "special": "ジェットパック"}, "バケットスロッシャー": {"sub": "キューバンボム", "special": "マルチミサイル"}, "ヒッセン": {"sub": "クイックボム", "special": "インクアーマー"}, "スクリュースロッシャー": {"sub": "ロボットボム", "special": "ハイパープレッサー"}, "ヒーロースロッシャーレプリカ": {"sub": "キューバンボム", "special": "マルチミサイル"}, "バレルスピナーデコ": {"sub": "シールド", "special": "バブルランチャー"}, "バレルスピナー": {"sub": "スプリンクラー", "special": "ハイパープレッサー"}, "スプラスピナー": {"sub": "クイックボム", "special": "マルチミサイル"}, "ヒーロースピナーレプリカ": {"sub": "スプリンクラー", "special": "ハイパープレッサー"}, "パラシェルター": {"sub": "スプリンクラー", "special": "アメフラシ"}, "ヒーローシェルターレプリカ": {"sub": "スプリンクラー", "special": "アメフラシ"}, "キャンピングシェルター": {"sub": "ビーコン", "special": "バブルランチャー"}}
+
+
 def get_battle_stage(event, rule):
-    req = urllib.request.Request("https://spla2.yuu26.com/{rule}/now".format(rule=rule))
+    req = urllib.request.Request(
+        "https://spla2.yuu26.com/{rule}/now".format(rule=rule))
     req.add_header("user-agent", "@nohararc")
     with urllib.request.urlopen(req) as res:
         response_body = res.read().decode("utf-8")
@@ -52,12 +59,14 @@ def get_battle_stage(event, rule):
                     start=now_start.strftime("%m/%d %H:%M"), end=now_end.strftime("%m/%d %H:%M"),
                     rule=data["rule_ex"]["name"],
                     stage1=data["maps_ex"][0]["name"], stage2=data["maps_ex"][1]["name"]
-                    ))
+                ))
             ]
         )
 
+
 def get_specified_battle_stage(event, rule, m):
-    req = urllib.request.Request("https://spla2.yuu26.com/{rule}/schedule".format(rule=rule))
+    req = urllib.request.Request(
+        "https://spla2.yuu26.com/{rule}/schedule".format(rule=rule))
     req.add_header("user-agent", "@nohararc")
     with urllib.request.urlopen(req) as res:
         response_body = res.read().decode("utf-8")
@@ -75,9 +84,10 @@ def get_specified_battle_stage(event, rule, m):
                             start=start_time.strftime("%m/%d %H:%M"), end=end_time.strftime("%m/%d %H:%M"),
                             rule=d["rule_ex"]["name"],
                             stage1=d["maps_ex"][0]["name"], stage2=d["maps_ex"][1]["name"]
-                            ))
+                        ))
                     ]
                 )
+
 
 @app.route("/")
 def hello_world():
@@ -126,7 +136,8 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text="{0} ～ {1}\n{2}\nブキ : {3}\n{4}\n{5}\n{6}".format(
-                        now_start.strftime("%m/%d %H:%M"), now_end.strftime("%m/%d %H:%M"),
+                        now_start.strftime(
+                            "%m/%d %H:%M"), now_end.strftime("%m/%d %H:%M"),
                         now["stage"]["name"],
                         now["weapons"][0]["name"], now["weapons"][1]["name"],
                         now["weapons"][2]["name"], now["weapons"][3]["name"]))
@@ -155,6 +166,18 @@ def handle_message(event):
     elif m_regular is not None:
         rule = "regular"
         get_specified_battle_stage(event, rule, m_regular)
+
+    elif text in weapons:
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="ブキ: {weapon}\nサブ: {sub}\nスペシャル: {special}".format(
+                    weapon=text,
+                    sub=weapons[text]["sub"],
+                    special=weapons[text]["special"]
+                ))
+            ]
+        )
+
 
 if __name__ == "__main__":
     app.run()
