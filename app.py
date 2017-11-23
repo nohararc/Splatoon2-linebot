@@ -43,32 +43,6 @@ weapons_json = open("weapons.json", "r", encoding="utf-8")
 weapons = json.load(weapons_json)
 
 
-
-def get_specified_battle_stage(event, rule, m):
-    req = urllib.request.Request(
-        "https://spla2.yuu26.com/{rule}/schedule".format(rule=rule))
-    req.add_header("user-agent", "@nohararc")
-    with urllib.request.urlopen(req) as res:
-        response_body = res.read().decode("utf-8")
-        response_json = json.loads(response_body.split("\n")[0])
-        data = response_json["result"]
-        for d in data:
-            start_time = datetime.strptime(d["start"], '%Y-%m-%dT%H:%M:%S')
-            end_time = datetime.strptime(d["end"], '%Y-%m-%dT%H:%M:%S')
-            start_hour = start_time.strftime("%H")
-            print("start_hour = {}".format(start_hour))
-            if int(m.group(1)) == int(start_hour):
-                line_bot_api.reply_message(
-                    event.reply_token, [
-                        TextSendMessage(text="{start} ～ {end}\n{rule}\n{stage1}\n{stage2}".format(
-                            start=start_time.strftime("%m/%d %H:%M"),
-                            end=end_time.strftime("%m/%d %H:%M"),
-                            rule=d["rule_ex"]["name"],
-                            stage1=d["maps_ex"][0]["name"], stage2=d["maps_ex"][1]["name"]
-                        ))
-                    ]
-                )
-
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -91,9 +65,9 @@ def callback():
 def handle_message(event):
     text = event.message.text
 
-    m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)時', text)
-    m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)時', text)
-    m_regular = re.fullmatch(r'(?:レギュラーマッチ|ナワバリ)(\d+)時', text)
+    m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
+    m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
+    m_regular = re.fullmatch(r'(?:レギュラーマッチ|ナワバリ)(\d+)(時)?', text)
 
     if text == 'サーモンラン':
         salmon.salmon(line_bot_api, event)
@@ -112,15 +86,15 @@ def handle_message(event):
 
     elif m_league is not None:
         rule = "league"
-        get_specified_battle_stage(event, rule, m_league)
+        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_league)
 
     elif m_gachi is not None:
         rule = "gachi"
-        get_specified_battle_stage(event, rule, m_gachi)
+        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_gachi)
 
     elif m_regular is not None:
         rule = "regular"
-        get_specified_battle_stage(event, rule, m_regular)
+        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_regular)
 
     elif text in weapons:
         line_bot_api.reply_message(
