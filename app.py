@@ -55,7 +55,7 @@ res = cur.fetchall()
 weapons = [flatten for inner in res for flatten in inner]
 
 # サブブキ
-cur.execute('select special from weapons')
+cur.execute('select sub from weapons')
 res = cur.fetchall()
 subs = [flatten for inner in res for flatten in inner]
 
@@ -121,6 +121,13 @@ def handle_message(event):
         cur.execute('select sub, special from weapons where name=?', (text, ))
         sub, special = cur.fetchall()[0]
         buki.get_subspe(line_bot_api, event, text, sub, special)
+
+    elif text in subs:
+        cur.execute('select name from weapons where sub=?', (text, ))
+        res = cur.fetchall()
+        res = [flatten for inner in res for flatten in inner]
+        buki.get_subspe(line_bot_api, event, text, res)
+
 
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)
