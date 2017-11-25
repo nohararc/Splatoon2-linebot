@@ -126,7 +126,7 @@ def handle_message(event):
         cur.execute('select name from weapons where sub=?', (text, ))
         res = cur.fetchall()
         res = [flatten for inner in res for flatten in inner]
-        buki.get_subspe(line_bot_api, event, text, res)
+        buki.get_weapons(line_bot_api, event, text, *res)
 
 
     elif re.fullmatch(r'コマンド', text):
