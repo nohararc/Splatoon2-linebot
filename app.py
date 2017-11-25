@@ -23,6 +23,7 @@ import re
 import salmon
 import battle_stage
 import buki
+import command_help
 
 app = Flask(__name__)
 
@@ -100,6 +101,9 @@ def handle_message(event):
     elif text in weapons:
         buki.get_subspe(line_bot_api, event, text, **weapons)
 
+    elif re.fullmatch(r'コマンド', text):
+        command_help.command_list(line_bot_api, event)
+         
 
 
 if __name__ == "__main__":
