@@ -22,6 +22,7 @@ import re
 
 import salmon
 import battle_stage
+import buki
 
 app = Flask(__name__)
 
@@ -97,15 +98,8 @@ def handle_message(event):
         battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_regular)
 
     elif text in weapons:
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text="ブキ: {weapon}\nサブ: {sub}\nスペシャル: {special}".format(
-                    weapon=text,
-                    sub=weapons[text]["sub"],
-                    special=weapons[text]["special"]
-                ))
-            ]
-        )
+        buki.get_subspe(line_bot_api, event, text, **weapons)
+
 
 
 if __name__ == "__main__":
