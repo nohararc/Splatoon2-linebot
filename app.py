@@ -19,11 +19,13 @@ import urllib.request
 import json
 from datetime import datetime
 import re
+import sqlite3
 
 import salmon
 import battle_stage
 import buki
 import command_help
+
 
 app = Flask(__name__)
 
@@ -41,9 +43,26 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-weapons_json = open("weapons.json", "r", encoding="utf-8")
-weapons = json.load(weapons_json)
+# dbに接続してブキデータを取得
+dbname = 'splatoon2.sqlite3'
 
+conn = sqlite3.connect(dbname)
+cur = conn.cursor()
+
+# メインブキ, サブブキ, スペシャルをすべて取得
+cur.execute('select name from weapons')
+res = cur.fetchall()
+weapons = [flatten for inner in res for flatten in inner]
+
+# サブブキ
+cur.execute('select special from weapons')
+res = cur.fetchall()
+subs = [flatten for inner in res for flatten in inner]
+
+# スペシャル
+cur.execute('select special from weapons')
+res = cur.fetchall()
+specials = [flatten for inner in res for flatten in inner]
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -99,7 +118,9 @@ def handle_message(event):
         battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_regular)
 
     elif text in weapons:
-        buki.get_subspe(line_bot_api, event, text, **weapons)
+        cur.execute('select sub, special from weapons where name=?', (text, ))
+        sub, special = cur.fetchall()[0]
+        buki.get_subspe(line_bot_api, event, text, sub, special)
 
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)

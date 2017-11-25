@@ -10,13 +10,13 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImagemapSendMessage
 )
 
-def get_subspe(line_bot_api, event, text, **weapons):
+def get_subspe(line_bot_api, event, text, sub, special):
     line_bot_api.reply_message(
         event.reply_token, [
             TextSendMessage(text="ブキ: {weapon}\nサブ: {sub}\nスペシャル: {special}".format(
                 weapon=text,
-                sub=weapons[text]["sub"],
-                special=weapons[text]["special"]
+                sub=sub,
+                special=special
             ))
         ]
     )
