@@ -128,6 +128,12 @@ def handle_message(event):
         res = [flatten for inner in res for flatten in inner]
         buki.get_weapons(line_bot_api, event, text, *res)
 
+    elif text in specials:
+        cur.execute('select name from weapons where special=?', (text, ))
+        res = cur.fetchall()
+        res = [flatten for inner in res for flatten in inner]
+        buki.get_weapons(line_bot_api, event, text, *res)
+
 
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)
