@@ -50,7 +50,7 @@ conn = sqlite3.connect(dbname)
 cur = conn.cursor()
 
 # メインブキ, サブブキ, スペシャルをすべて取得
-cur.execute('select name from weapons')
+cur.execute('select name, name_short1, name_short2, name_short3 from weapons')
 res = cur.fetchall()
 weapons = [flatten for inner in res for flatten in inner]
 
@@ -63,6 +63,7 @@ subs = [flatten for inner in res for flatten in inner]
 cur.execute('select special from weapons')
 res = cur.fetchall()
 specials = [flatten for inner in res for flatten in inner]
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -107,20 +108,24 @@ def handle_message(event):
 
     elif m_league is not None:
         rule = "league"
-        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_league)
+        battle_stage.get_specified_battle_stage(
+            line_bot_api, event, rule, m_league)
 
     elif m_gachi is not None:
         rule = "gachi"
-        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_gachi)
+        battle_stage.get_specified_battle_stage(
+            line_bot_api, event, rule, m_gachi)
 
     elif m_regular is not None:
         rule = "regular"
-        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_regular)
+        battle_stage.get_specified_battle_stage(
+            line_bot_api, event, rule, m_regular)
 
     elif text in weapons:
-        cur.execute('select sub, special from weapons where name=?', (text, ))
-        sub, special = cur.fetchall()[0]
-        buki.get_subspe(line_bot_api, event, text, sub, special)
+        cur.execute(
+            'select name, sub, special  from weapons where ? in (name, name_short1, name_short2)', (text, ))
+        name, sub, special = cur.fetchall()[0]
+        buki.get_subspe(line_bot_api, event, name, sub, special)
 
     elif text in subs:
         cur.execute('select name from weapons where sub=?', (text, ))
@@ -134,10 +139,8 @@ def handle_message(event):
         res = [flatten for inner in res for flatten in inner]
         buki.get_weapons(line_bot_api, event, text, *res)
 
-
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)
-         
 
 
 if __name__ == "__main__":
