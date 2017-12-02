@@ -49,18 +49,19 @@ dbname = 'splatoon2.sqlite3'
 conn = sqlite3.connect(dbname)
 cur = conn.cursor()
 
-# メインブキ, サブブキ, スペシャルをすべて取得
+# メインブキ(短縮名含む)をすべて取得
 cur.execute('select name, name_short1, name_short2, name_short3 from weapons')
 res = cur.fetchall()
 weapons = [flatten for inner in res for flatten in inner]
 
-# サブブキ
-cur.execute('select sub from weapons')
+# サブブキ(短縮名含む)をすべて取得
+cur.execute('select sub, sub_short1, sub_short2, sub_short3 from weapons')
 res = cur.fetchall()
 subs = [flatten for inner in res for flatten in inner]
 
-# スペシャル
-cur.execute('select special from weapons')
+# スペシャル(短縮名含む)をすべて取得
+cur.execute(
+    'select special, special_short1, special_short2, special_short3 from weapons')
 res = cur.fetchall()
 specials = [flatten for inner in res for flatten in inner]
 
@@ -128,10 +129,15 @@ def handle_message(event):
         buki.get_subspe(line_bot_api, event, name, sub, special)
 
     elif text in subs:
-        cur.execute('select name from weapons where sub=?', (text, ))
+        cur.execute(
+            'select sub from weapons where ? in (sub, sub_short1, sub_short2, sub_short3)', (text, ))
+        sub = cur.fetchall()[0]
+
+        cur.execute(
+            'select name from weapons where ? in (sub, sub_short1, sub_short2, sub_short3)', (text, ))
         res = cur.fetchall()
-        res = [flatten for inner in res for flatten in inner]
-        buki.get_weapons(line_bot_api, event, text, *res)
+        names = [flatten for inner in res for flatten in inner]
+        buki.get_weapons(line_bot_api, event, sub, *names)
 
     elif text in specials:
         cur.execute('select name from weapons where special=?', (text, ))
