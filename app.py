@@ -64,6 +64,7 @@ cur.execute('select special from weapons')
 res = cur.fetchall()
 specials = [flatten for inner in res for flatten in inner]
 
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -107,18 +108,22 @@ def handle_message(event):
 
     elif m_league is not None:
         rule = "league"
-        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_league)
+        battle_stage.get_specified_battle_stage(
+            line_bot_api, event, rule, m_league)
 
     elif m_gachi is not None:
         rule = "gachi"
-        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_gachi)
+        battle_stage.get_specified_battle_stage(
+            line_bot_api, event, rule, m_gachi)
 
     elif m_regular is not None:
         rule = "regular"
-        battle_stage.get_specified_battle_stage(line_bot_api, event, rule, m_regular)
+        battle_stage.get_specified_battle_stage(
+            line_bot_api, event, rule, m_regular)
 
     elif text in weapons:
-        cur.execute('select sub, special from weapons where name=?', (text, ))
+        cur.execute(
+            'select * from weapons where name=? or name_short1=? or name_short2=?', (text, text, text))
         sub, special = cur.fetchall()[0]
         buki.get_subspe(line_bot_api, event, text, sub, special)
 
@@ -134,10 +139,8 @@ def handle_message(event):
         res = [flatten for inner in res for flatten in inner]
         buki.get_weapons(line_bot_api, event, text, *res)
 
-
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)
-         
 
 
 if __name__ == "__main__":
