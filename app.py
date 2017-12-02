@@ -129,10 +129,12 @@ def handle_message(event):
         buki.get_subspe(line_bot_api, event, name, sub, special)
 
     elif text in subs:
+        # 短縮名から正式名に変換
         cur.execute(
             'select sub from weapons where ? in (sub, sub_short1, sub_short2, sub_short3)', (text, ))
-        sub = cur.fetchall()[0]
+        sub = cur.fetchall()[0][0]
 
+        # 条件に合うブキ一覧を取得
         cur.execute(
             'select name from weapons where ? in (sub, sub_short1, sub_short2, sub_short3)', (text, ))
         res = cur.fetchall()
