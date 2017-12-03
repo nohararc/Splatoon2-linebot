@@ -23,13 +23,13 @@ def get_subspe(line_bot_api, event, name, sub, special):
     )
 
 
-def get_weapons(line_bot_api, event, sub, *names):
+def get_weapons(line_bot_api, event, text, *names):
     weapons = []
     weapons = "\n".join(names)
     line_bot_api.reply_message(
         event.reply_token, [
-            TextSendMessage(text="{sub}のブキ一覧\n{weapons}".format(
-                sub=sub,
+            TextSendMessage(text="{text}のブキ一覧\n{weapons}".format(
+                text=text,
                 weapons=weapons
             ))
         ]

@@ -142,10 +142,17 @@ def handle_message(event):
         buki.get_weapons(line_bot_api, event, sub, *names)
 
     elif text in specials:
-        cur.execute('select name from weapons where special=?', (text, ))
+        # 短縮名から正式名に変換
+        cur.execute(
+            'select special from weapons where ? in (special, special_short1, special_short2, special_short3)', (text, ))
+        special = cur.fetchall()[0][0]
+
+        # 条件に合うブキ一覧を取得
+        cur.execute(
+            'select name from weapons where ? in (special, special_short1, special_short2, special_short3)', (text, ))
         res = cur.fetchall()
-        res = [flatten for inner in res for flatten in inner]
-        buki.get_weapons(line_bot_api, event, text, *res)
+        names = [flatten for inner in res for flatten in inner]
+        buki.get_weapons(line_bot_api, event, special, *names)
 
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)
