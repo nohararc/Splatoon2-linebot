@@ -65,6 +65,11 @@ cur.execute(
 res = cur.fetchall()
 specials = [flatten for inner in res for flatten in inner]
 
+# ブキのジャンル(短縮名含む)をすべて取得
+cur.execute(
+    'select genre, genre_short1, genre_short2, genre_short3 from weapons')
+res = cur.fetchall()
+genres = [flatten for inner in res for flatten in inner]
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -123,6 +128,7 @@ def handle_message(event):
             line_bot_api, event, rule, m_regular)
 
     elif text in weapons:
+        # ブキ名からサブスペシャルを取得
         cur.execute(
             'select name, sub, special  from weapons where ? in (name, name_short1, name_short2)', (text, ))
         name, sub, special = cur.fetchall()[0]
@@ -153,6 +159,19 @@ def handle_message(event):
         res = cur.fetchall()
         names = [flatten for inner in res for flatten in inner]
         buki.get_weapons(line_bot_api, event, special, *names)
+
+    elif text in genres:
+        # 短縮名から正式名に変換
+        cur.execute(
+            'select genre from weapons where ? in (genre, genre_short1, genre_short2, genre_short3)', (text, ))
+        genre = cur.fetchall()[0][0]
+
+        # 条件に合うブキ一覧を取得
+        cur.execute(
+            'select name from weapons where ? in (genre, genre_short1, genre_short2, genre_short3)', (text, ))
+        res = cur.fetchall()
+        names = [flatten for inner in res for flatten in inner]
+        buki.get_weapons(line_bot_api, event, genre, *names)
 
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)
