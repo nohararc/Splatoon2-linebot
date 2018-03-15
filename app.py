@@ -92,6 +92,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
+    print(text)
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
