@@ -177,6 +177,11 @@ def handle_message(event):
     elif re.fullmatch(r'コマンド', text):
         command_help.command_list(line_bot_api, event)
 
+    elif re.fullmatch(r'ブキランダム|ランダムブキ', text):
+        # ランダムでブキを1つ取得
+        cur.execute('select name, sub, special  from weapons ORDER BY RANDOM() limit 1')
+        name, sub, special = cur.fetchall()[0]
+        buki.get_subspe(line_bot_api, event, name, sub, special)
 
 if __name__ == "__main__":
     app.run()
