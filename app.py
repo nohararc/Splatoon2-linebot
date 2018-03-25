@@ -44,8 +44,8 @@ line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
 # dbに接続してブキデータを取得
-dbname = 'splatoon2.sqlite3'
-
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+dbname = os.path.join(BASE_DIR, "splatoon2.sqlite3")
 conn = sqlite3.connect(dbname)
 cur = conn.cursor()
 
