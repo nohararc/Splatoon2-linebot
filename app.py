@@ -183,5 +183,15 @@ def handle_message(event):
         name, sub, special = cur.fetchall()[0]
         buki.get_subspe(line_bot_api, event, name, sub, special)
 
+    elif re.fullmatch(r'ステージランダム|ランダムステージ', text):
+        # ランダムでステージを1つ取得
+        cur.execute('select stage_name from stages ORDER BY RANDOM() limit 1')
+        stage_name = cur.fetchall()[0][0]
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="{stage}".format(stage=stage_name))
+            ]
+        )
+
 if __name__ == "__main__":
     app.run()
