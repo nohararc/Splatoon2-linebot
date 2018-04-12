@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 import re
 import sqlite3
+import random
 
 import salmon
 import battle_stage
@@ -190,6 +191,26 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text="{stage}".format(stage=stage_name))
+            ]
+        )
+
+    elif re.fullmatch(r'ルールランダム|ランダムルール', text):
+        # ランダムでルールを1つ取得
+        rules = ["ガチアサリ", "ガチヤグラ", "ガチホコ", "ガチエリア", "ナワバリ"]
+        rule_name = random.choice(rules)
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="{rule}".format(rule=rule_name))
+            ]
+        )
+
+    elif re.fullmatch(r'ガチルールランダム|ランダムガチルール', text):
+        # ランダムでルールを1つ取得
+        rules = ["ガチアサリ", "ガチヤグラ", "ガチホコ", "ガチエリア"]
+        rule_name = random.choice(rules)
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="{rule}".format(rule=rule_name))
             ]
         )
 
