@@ -16,8 +16,8 @@ import app
 class TestSalmon(unittest.TestCase):
 
     file_dir = os.path.dirname(__file__)
-    webhook_sample_json_path = os.path.join(file_dir, 'webhook.json')
-    with open(webhook_sample_json_path, encoding="utf-8") as fp:
+    salmon_json_path = os.path.join(file_dir, 'salmon.json')
+    with open(salmon_json_path, encoding="utf-8") as fp:
         body = fp.read()
 
     # mock
@@ -36,8 +36,8 @@ class TestSalmon(unittest.TestCase):
 class TestRandom(unittest.TestCase):
 
     file_dir = os.path.dirname(__file__)
-    webhook_sample_json_path = os.path.join(file_dir, 'webhook.json')
-    with open(webhook_sample_json_path, encoding="utf-8") as fp:
+    random_json_path = os.path.join(file_dir, 'random.json')
+    with open(random_json_path, encoding="utf-8") as fp:
         body = fp.read()
 
     # mock
@@ -49,12 +49,12 @@ class TestRandom(unittest.TestCase):
         app.line_bot_api.reply_message = MagicMock()
 
     def test_random_rule(self):
-        app.handle_message(self.events[1])
+        app.handle_message(self.events[0])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
         self.assertRegex(textsendmessage[0].text, r"(ナワバリ)|(ガチ)(ヤグラ|ホコ|エリア|アサリ)")
 
     def test_random_weapon(self):
-        app.handle_message(self.events[2])
+        app.handle_message(self.events[1])
         res = app.line_bot_api.reply_message.call_args
         _, textsendmessage = res[0]
         self.assertRegex(textsendmessage[0].text, r"ブキ: .+\nサブ: .+\nスペシャル: .+")

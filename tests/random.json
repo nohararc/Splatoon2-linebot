@@ -3,15 +3,6 @@
     {
       "type": "message",
       "message": {
-        "id": "325708",
-        "type": "text",
-        "text": "サーモンラン"
-      }
-    },
-    {
-      "type": "message",
-      "message": {
-        "id": "325708",
         "type": "text",
         "text": "ランダムルール"
       }
