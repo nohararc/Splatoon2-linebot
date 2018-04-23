@@ -31,8 +31,6 @@ import logging
 
 
 app = Flask(__name__)
-app.logger.addHandler(logging.StreamHandler())
-app.logger.setLevel(logging.info)
 
 
 # 環境変数からchannel_secret・channel_access_tokenを取得
