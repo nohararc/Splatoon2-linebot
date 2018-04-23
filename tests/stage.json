@@ -25,6 +25,20 @@
       "type": "message",
       "message": {
         "type": "text",
+        "text": "ガチマ21"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "リグマ21"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
         "text": "ナワバリ21"
       }
     }

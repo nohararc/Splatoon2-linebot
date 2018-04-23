@@ -1,0 +1,627 @@
+{
+  "events": [
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラシューターコラボ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": ".52ガロン"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "わかばシューター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "シャープマーカー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "N-ZAP85"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "プライムシューター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ボールドマーカー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "プロモデラーRG"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラシューター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ジェットスイーパーカスタム"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "プライムシューターコラボ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "もみじシューター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "プロモデラーMG"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": ".96ガロン"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーローシューターレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "L3リールガン"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ジェットスイーパー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "H3リールガン"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "デュアルスイーパー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラマニューバー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラマニューバーコラボ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スパッタリー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーローマニューバーレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラスコープ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スクイックリンα"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラチャージャー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "14式竹筒銃・甲"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーローチャージャーレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ソイチューバー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラチャージャーコラボ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラスコープコラボ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "リッター4K"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "4Kスコープ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "リッター4kカスタム"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "4kスコープカスタム"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ホットブラスターカスタム"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ノヴァブラスター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ラピッドブラスター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ホットブラスター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "Rブラスターエリート"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ロングブラスター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "クラッシュブラスター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーローブラスターレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ダイナモローラー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラローラーコラボ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "カーボンローラー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ダイナモローラーテスラ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラローラー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーローローラーレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヴァリアブルローラー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヴァリアブルローラーフォイル"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ホクサイ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "パブロ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "パブロ・ヒュー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーローブラシレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "バケットスロッシャー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒッセン"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スクリュースロッシャー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーロースロッシャーレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "バレルスピナーデコ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "バレルスピナー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラスピナー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーロースピナーレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "パラシェルター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒーローシェルターレプリカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "キャンピングシェルター"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ハイドラント"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ケルビン525"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "N-ZAP89"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": ".52ガロンデコ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": ".96ガロンデコ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "L3リールガンD"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "クアッドホッパーブラック"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スクリュースロッシャーネオ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スパイガジェット"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スパッタリー・ヒュー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ソイチューバーカスタム"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ノヴァブラスターネオ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "バケットスロッシャーデコ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ホクサイ・ヒュー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ボトルガイザー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ボールドマーカーネオ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ラピッドブラスターデコ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "H3リールガンD"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "スプラスピナーコラボ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "パラシェルターソレーラ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "クラッシュブラスターネオ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ヒッセン・ヒュー"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ロングブラスター"
+      }
+    }
+  ]
+}
