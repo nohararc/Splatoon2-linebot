@@ -27,8 +27,6 @@ import battle_stage
 import buki
 import command_help
 
-import logging
-
 
 app = Flask(__name__)
 
@@ -98,6 +96,8 @@ def callback():
 def handle_message(event):
     text = event.message.text
     app.logger.info(text)
+    app.logger.error(text)
+
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
