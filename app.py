@@ -27,8 +27,13 @@ import battle_stage
 import buki
 import command_help
 
+import logging
+
 
 app = Flask(__name__)
+app.logger.addHandler(logging.StreamHandler())
+app.logger.setLevel(logging.info)
+
 
 # 環境変数からchannel_secret・channel_access_tokenを取得
 channel_secret = os.environ['LINE_CHANNEL_SECRET']
@@ -72,6 +77,7 @@ cur.execute(
 res = cur.fetchall()
 genres = [flatten for inner in res for flatten in inner]
 
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -94,6 +100,7 @@ def callback():
 def handle_message(event):
     text = event.message.text
     print(text)
+    app.logger.info(text)
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
@@ -180,7 +187,8 @@ def handle_message(event):
 
     elif re.fullmatch(r'ブキランダム|ランダムブキ', text):
         # ランダムでブキを1つ取得
-        cur.execute('select name, sub, special  from weapons ORDER BY RANDOM() limit 1')
+        cur.execute(
+            'select name, sub, special  from weapons ORDER BY RANDOM() limit 1')
         name, sub, special = cur.fetchall()[0]
         buki.get_subspe(line_bot_api, event, name, sub, special)
 
@@ -213,6 +221,7 @@ def handle_message(event):
                 TextSendMessage(text="{rule}".format(rule=rule_name))
             ]
         )
+
 
 if __name__ == "__main__":
     app.run()
