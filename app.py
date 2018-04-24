@@ -98,8 +98,9 @@ def handle_message(event):
     text = event.message.text
 #    app.logger.info(text)
 #    app.logger.error(text)
-    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+#    app.logger.addHandler(logging.StreamHandler(sys.stdout))
     app.logger.setLevel(logging.INFO)
+    app.logger.info(text)
 
 
 
