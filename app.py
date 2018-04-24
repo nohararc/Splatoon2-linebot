@@ -96,9 +96,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
-#    app.logger.info(text)
-#    app.logger.error(text)
-    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+    app.logger.info(text)
 
 
 
