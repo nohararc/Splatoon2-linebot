@@ -96,8 +96,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
-    app.logger.setLevel(logging.ERROR)
-    app.logger.info(text)
+    app.logger.ERROR(text)
 
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
