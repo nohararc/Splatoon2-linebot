@@ -98,9 +98,7 @@ def callback():
 def handle_message(event):
     text = event.message.text
 
-    handler = StreamHandler()
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
+    app.logger.setLevel(logging.DEBUG)
     app.logger.info(text)
 
 
