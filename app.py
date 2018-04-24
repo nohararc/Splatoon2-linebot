@@ -28,6 +28,7 @@ import buki
 import command_help
 
 import logging
+from logging import StreamHandler
 
 app = Flask(__name__)
 
@@ -96,7 +97,11 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
-    app.logger.debug(text)
+
+    handler = StreamHandler()
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
+    app.logger.info(text)
 
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
