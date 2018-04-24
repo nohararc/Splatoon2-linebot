@@ -100,7 +100,7 @@ def handle_message(event):
 #    app.logger.error(text)
 #    app.logger.addHandler(logging.StreamHandler(sys.stdout))
     app.logger.setLevel(logging.INFO)
-    app.logger.info(text)
+    app.logger.addHandler(text)
 
 
 
