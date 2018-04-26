@@ -11,4 +11,5 @@ Splatoon2のステージ情報等を教えてくれるLINE bot
 <img width="270" alt="ケルビン.PNG" src="https://qiita-image-store.s3.amazonaws.com/0/17012/58dd157e-2d1d-b92f-d9c2-39c9e61ca7ee.png">
 
 
-
+利用させていただいているAPI  
+https://spla2.yuu26.com/
