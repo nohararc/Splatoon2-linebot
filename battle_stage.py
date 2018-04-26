@@ -42,7 +42,6 @@ def get_specified_battle_stage(line_bot_api, event, rule, m):
             start_time = datetime.strptime(d["start"], '%Y-%m-%dT%H:%M:%S')
             end_time = datetime.strptime(d["end"], '%Y-%m-%dT%H:%M:%S')
             start_hour = start_time.strftime("%H")
-            print("start_hour = {}".format(start_hour))
             if int(m.group(1)) == int(start_hour):
                 line_bot_api.reply_message(
                     event.reply_token, [
