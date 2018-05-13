@@ -75,6 +75,18 @@ cur.execute(
 res = cur.fetchall()
 genres = [flatten for inner in res for flatten in inner]
 
+# ブランド名をすべて取得
+cur.execute(
+    'select brand_name from brand')
+res = cur.fetchall()
+brands = [flatten for inner in res for flatten in inner]
+
+# ギアパワーの名前(短縮名含む)をすべて取得
+cur.execute(
+    'select distinct easy_gear_power, easy_gear_power_short1, easy_gear_power_short2, easy_gear_power_short3, hard_gear_power, hard_gear_power_short1, hard_gear_power_short2, hard_gear_power_short3 from brand')
+res = cur.fetchall()
+gears = [flatten for inner in res for flatten in inner]
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -99,7 +111,6 @@ def handle_message(event):
     text = event.message.text
 
     app.logger.info(text)
-
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
@@ -187,7 +198,7 @@ def handle_message(event):
     elif re.fullmatch(r'ブキランダム|ランダムブキ', text):
         # ランダムでブキを1つ取得
         cur.execute(
-            'select name, sub, special  from weapons ORDER BY RANDOM() limit 1')
+            'select name, sub, special from weapons ORDER BY RANDOM() limit 1')
         name, sub, special = cur.fetchall()[0]
         buki.get_subspe(line_bot_api, event, name, sub, special)
 
@@ -218,6 +229,44 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text="{rule}".format(rule=rule_name))
+            ]
+        )
+
+    elif text in brands:
+        # ブランド名から付きやすい/付きにくいギアパワーを取得
+        cur.execute(
+            'select easy_gear_power, hard_gear_power from brand where brand_name=?', (text, ))
+        gear_power = cur.fetchall()
+        easy_gear_power, hard_gear_power = gear_power[0][0], gear_power[0][1]
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(
+                    text="ブランド: {text}\n付きやすい: {easy}\n付きにくい: {hard}".format(text=text, easy=easy_gear_power, hard=hard_gear_power))
+            ]
+        )
+
+    elif text in gears:
+        # ギアパワーから、付きやすい/付きにくいブランドを取得
+
+        # 短縮名から正式名を取得
+        cur.execute(
+            'select easy_gear_power from brand where ? in (easy_gear_power, easy_gear_power_short1, easy_gear_power_short2, easy_gear_power_short3)', (text, ))
+        gear_power = cur.fetchall()[0][0]
+
+        # ギアパワーから、付きやすいブランドを取得
+        cur.execute(
+            'select brand_name from brand where easy_gear_power = ?', (gear_power, ))
+        easy_brand_name = cur.fetchall()[0][0]
+
+        # ギアパワーから、付きにくいブランドを取得
+        cur.execute(
+            'select brand_name from brand where hard_gear_power = ?', (gear_power, ))
+        hard_brand_name = cur.fetchall()[0][0]
+
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(
+                    text="ギア: {text}\n付きやすい: {easy}\n付きにくい: {hard}".format(text=gear_power, easy=easy_brand_name, hard=hard_brand_name))
             ]
         )
 

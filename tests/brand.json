@@ -1,0 +1,18 @@
+{
+  "events": [
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "バトロイカ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "相手インク影響軽減"
+      }
+    }
+  ]
+}

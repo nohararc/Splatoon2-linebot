@@ -120,5 +120,31 @@ class TestWeapon(unittest.TestCase):
         self.assertRegex(textsendmessage[0].text, r"ブキ: スプラシューターコラボ\nサブ: スプラッシュボム\nスペシャル: ジェットパック")
 
 
+class TestBrand(unittest.TestCase):
+
+    file_dir = os.path.dirname(__file__)
+    weapon_json_path = os.path.join(file_dir, 'brand.json')
+    with open(weapon_json_path, encoding="utf-8") as fp:
+        body = fp.read()
+
+    # mock
+    parser = WebhookParser('channel_secret')
+    parser.signature_validator.validate = lambda a, b: True
+    events = parser.parse(body, 'channel_secret')
+
+    def setUp(self):
+        app.line_bot_api.reply_message = MagicMock()
+
+    def test_brand_to_gear(self):
+        app.handle_message(self.events[0])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(textsendmessage[0].text, r"ブランド: .+\n付きやすい: .+\n付きにくい: .+")
+
+    def test_gear_to_brand(self):
+        app.handle_message(self.events[1])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(textsendmessage[0].text, r"ギア: .+\n付きやすい: .+\n付きにくい: .+")
+
+
 if __name__ == '__main__':
     unittest.main()
