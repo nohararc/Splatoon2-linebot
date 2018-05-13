@@ -256,17 +256,21 @@ def handle_message(event):
         # ギアパワーから、付きやすいブランドを取得
         cur.execute(
             'select brand_name from brand where easy_gear_power = ?', (gear_power, ))
-        easy_brand_name = cur.fetchall()[0][0]
+        res = cur.fetchall()
+        easy_brand_names = [flatten for inner in res for flatten in inner]
+        easy_brand_names = ", ".join(easy_brand_names)
 
         # ギアパワーから、付きにくいブランドを取得
         cur.execute(
             'select brand_name from brand where hard_gear_power = ?', (gear_power, ))
-        hard_brand_name = cur.fetchall()[0][0]
+        res = cur.fetchall()
+        hard_brand_names = [flatten for inner in res for flatten in inner]
+        hard_brand_names = ", ".join(hard_brand_names)
 
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(
-                    text="ギア: {text}\n付きやすい: {easy}\n付きにくい: {hard}".format(text=gear_power, easy=easy_brand_name, hard=hard_brand_name))
+                    text="ギア: {text}\n付きやすい: {easy}\n付きにくい: {hard}".format(text=gear_power, easy=easy_brand_names, hard=hard_brand_names))
             ]
         )
 
