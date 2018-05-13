@@ -203,7 +203,7 @@ def handle_message(event):
 
     elif re.fullmatch(r'ルールランダム|ランダムルール', text):
         # ランダムでルールを1つ取得
-        rules = ["ガチアサリ", "ガチヤグラ", "ガチホコ", "ガチエリア", "ナワバリ"]
+        rules = ["ガチアサリ", "ガチヤグラ", "ガチホコバトル", "ガチエリア", "ナワバリ"]
         rule_name = random.choice(rules)
         line_bot_api.reply_message(
             event.reply_token, [

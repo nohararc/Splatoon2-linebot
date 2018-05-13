@@ -1,0 +1,46 @@
+{
+  "events": [
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ガチマ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "リグマ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ナワバリ"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ガチマ21"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "リグマ21"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ナワバリ21"
+      }
+    }
+  ]
+}

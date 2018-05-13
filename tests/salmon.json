@@ -1,0 +1,11 @@
+{
+  "events": [
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "サーモンラン"
+      }
+    }
+  ]
+}

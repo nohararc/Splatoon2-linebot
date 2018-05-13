@@ -1,0 +1,18 @@
+{
+  "events": [
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ランダムルール"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ランダムブキ"
+      }
+    }
+  ]
+}
