@@ -98,7 +98,7 @@ def callback():
 def handle_message(event):
     text = event.message.text
 
-    app.logger.error(text)
+    app.logger.info(text)
 
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
