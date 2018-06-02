@@ -31,12 +31,11 @@ class TestSalmon(unittest.TestCase):
     def test_salmon(self):
         app.handle_message(self.events[0])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r'(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
+        self.assertRegex(textsendmessage[0].text, r'(オープン！|クローズ！)\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
 
         app.handle_message(self.events[1])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        print(self.events[1], textsendmessage[0].text)
-        self.assertRegex(textsendmessage[0].text, r'(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
+        self.assertRegex(textsendmessage[0].text, r'(オープン！|クローズ！)\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
 
 class TestRandom(unittest.TestCase):
 

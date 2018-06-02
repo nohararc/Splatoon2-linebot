@@ -8,6 +8,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImagemapSendMessage
 )
 
+
 def salmon(line_bot_api, event):
     req = urllib.request.Request("https://spla2.yuu26.com/coop/schedule")
     req.add_header("user-agent", "@nohararc")
@@ -21,9 +22,15 @@ def salmon(line_bot_api, event):
         now_start = datetime.strptime(now["start"], '%Y-%m-%dT%H:%M:%S')
         now_end = datetime.strptime(now["end"], '%Y-%m-%dT%H:%M:%S')
 
+        if now_start < datetime.today() < now_end:
+            is_open = "オープン！"
+        else:
+            is_open = "クローズ！"
+
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text="{0} ～ {1}\n{2}\nブキ : {3}\n{4}\n{5}\n{6}".format(
+                TextSendMessage(text="{0}\n{1} ～ {2}\n{3}\nブキ : {4}\n{5}\n{6}\n{7}".format(
+                    is_open,
                     now_start.strftime(
                         "%m/%d %H:%M"), now_end.strftime("%m/%d %H:%M"),
                     now["stage"]["name"],
