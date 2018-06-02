@@ -116,7 +116,7 @@ def handle_message(event):
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
     m_regular = re.fullmatch(r'(?:レギュラーマッチ|ナワバリ)(\d+)(時)?', text)
 
-    if text == 'サーモンラン':
+    if re.fullmatch(r'サーモンラン|バイト', text):
         salmon.salmon(line_bot_api, event)
 
     elif re.fullmatch(r'レギュラーマッチ|ナワバリ', text):

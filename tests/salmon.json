@@ -6,6 +6,13 @@
         "type": "text",
         "text": "サーモンラン"
       }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "バイト"
+      }
     }
   ]
 }
