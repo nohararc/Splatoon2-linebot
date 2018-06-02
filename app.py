@@ -274,6 +274,21 @@ def handle_message(event):
             ]
         )
 
+    elif re.fullmatch(r'ブランド', text):
+        # ブランド名一覧を取得
+        cur.execute('select brand_name from brand')
+        res = cur.fetchall()
+        brand_name = [flatten for inner in res for flatten in inner]
+        brand_name = "\n".join(brand_name)
+        print(brand_name)
+
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(
+                    text="{brand_name}".format(brand_name=brand_name))
+            ]
+        )
+
 
 if __name__ == "__main__":
     app.run()

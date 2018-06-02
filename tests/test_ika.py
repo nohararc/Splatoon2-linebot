@@ -149,6 +149,11 @@ class TestBrand(unittest.TestCase):
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
         self.assertRegex(textsendmessage[0].text, r"ギア: .+\n付きやすい: .+\n付きにくい: .+")
 
+    def test_brand_name(self):
+        app.handle_message(self.events[2])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(textsendmessage[0].text, r".+\n")
+
 
 if __name__ == '__main__':
     unittest.main()

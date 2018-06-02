@@ -13,6 +13,13 @@
         "type": "text",
         "text": "スペシャル減少量ダウン"
       }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ブランド"
+      }
     }
   ]
 }
