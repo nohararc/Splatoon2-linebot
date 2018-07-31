@@ -14,6 +14,18 @@
 
 """linebot.models package."""
 
+from .actions import (  # noqa
+    Action,
+    PostbackAction,
+    MessageAction,
+    URIAction,
+    DatetimePickerAction,
+    Action as TemplateAction,  # backward compatibility
+    PostbackAction as PostbackTemplateAction,  # backward compatibility
+    MessageAction as MessageTemplateAction,  # backward compatibility
+    URIAction as URITemplateAction,  # backward compatibility
+    DatetimePickerAction as DatetimePickerTemplateAction,  # backward compatibility
+)
 from .base import (  # noqa
     Base,
 )
@@ -29,9 +41,11 @@ from .events import (  # noqa
     JoinEvent,
     LeaveEvent,
     PostbackEvent,
+    AccountLinkEvent,
     BeaconEvent,
     Postback,
     Beacon,
+    Link,
 )
 from .imagemap import (  # noqa
     ImagemapSendMessage,
@@ -49,10 +63,20 @@ from .messages import (  # noqa
     AudioMessage,
     LocationMessage,
     StickerMessage,
-    FileMessage
+    FileMessage,
 )
 from .responses import (  # noqa
     Profile,
+    MemberIds,
+    Content,
+    RichMenuResponse,
+    Content as MessageContent,  # backward compatibility
+)
+from .rich_menu import (  # noqa
+    RichMenu,
+    RichMenuSize,
+    RichMenuArea,
+    RichMenuBounds,
 )
 from .send_messages import (  # noqa
     SendMessage,
@@ -76,11 +100,23 @@ from .template import (  # noqa
     ConfirmTemplate,
     CarouselTemplate,
     CarouselColumn,
-    TemplateAction,
-    PostbackTemplateAction,
-    MessageTemplateAction,
-    URITemplateAction,
-    DatetimePickerTemplateAction,
     ImageCarouselTemplate,
     ImageCarouselColumn,
+)
+from .flex_message import (  # noqa
+    FlexSendMessage,
+    FlexContainer,
+    BubbleContainer,
+    BubbleStyle,
+    BlockStyle,
+    CarouselContainer,
+    FlexComponent,
+    BoxComponent,
+    ButtonComponent,
+    FillerComponent,
+    IconComponent,
+    ImageComponent,
+    SeparatorComponent,
+    SpacerComponent,
+    TextComponent
 )
