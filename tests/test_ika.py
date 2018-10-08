@@ -62,6 +62,11 @@ class TestRandom(unittest.TestCase):
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
         self.assertRegex(textsendmessage[0].text, r"ブキ: .+\nサブ: .+\nスペシャル: .+")
 
+    def test_random_weapon_genre(self):
+        app.handle_message(self.events[2])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(textsendmessage[0].text, r"ブキ: .+\nサブ: .+\nスペシャル: .+")
+
 class TestStage(unittest.TestCase):
 
     file_dir = os.path.dirname(__file__)

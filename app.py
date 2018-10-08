@@ -115,6 +115,7 @@ def handle_message(event):
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
     m_regular = re.fullmatch(r'(?:レギュラーマッチ|ナワバリ)(\d+)(時)?', text)
+    m_random_buki = re.fullmatch(r'(?:ブキランダム|ランダムブキ) (?P<genre>.+)', text)
 
     if re.fullmatch(r'サーモンラン|バイト', text):
         salmon.salmon(line_bot_api, event)
@@ -202,9 +203,19 @@ def handle_message(event):
         name, sub, special = cur.fetchall()[0]
         buki.get_subspe(line_bot_api, event, name, sub, special)
 
+    elif m_random_buki:
+        # ランダムでブキを1つ取得(ブキのジャンル指定)
+        cur.execute(
+            'select name, sub, special from weapons where genre=? order by random() limit 1', (m_random_buki.group("genre"), ))
+        try:
+            name, sub, special = cur.fetchall()[0]
+            buki.get_subspe(line_bot_api, event, name, sub, special)
+        except:
+            pass
+
     elif re.fullmatch(r'ステージランダム|ランダムステージ', text):
         # ランダムでステージを1つ取得
-        cur.execute('select stage_name from stages ORDER BY RANDOM() limit 1')
+        cur.execute('select stage_name from stages order by random() limit 1')
         stage_name = cur.fetchall()[0][0]
         line_bot_api.reply_message(
             event.reply_token, [
@@ -280,7 +291,6 @@ def handle_message(event):
         res = cur.fetchall()
         brand_name = [flatten for inner in res for flatten in inner]
         brand_name = "\n".join(brand_name)
-        print(brand_name)
 
         line_bot_api.reply_message(
             event.reply_token, [
