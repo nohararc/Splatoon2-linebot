@@ -124,17 +124,17 @@ class TestStage(unittest.TestCase):
         app.handle_message(self.events[6])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
         self.assertRegex(
-            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\nナワバリバトル\n.+\n.+")
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n■ナワバリバトル\n.+")
 
         app.handle_message(self.events[7])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
         self.assertRegex(
-            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(■ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+")
 
         app.handle_message(self.events[8])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
         self.assertRegex(
-            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(■ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+")
 
 
 class TestWeapon(unittest.TestCase):

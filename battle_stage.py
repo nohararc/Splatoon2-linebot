@@ -72,7 +72,9 @@ def get_battle_stage_all(line_bot_api, event, rule):
             end_time = datetime.strptime(d["end"], '%Y-%m-%dT%H:%M:%S')
 
             schedule_all += start_time.strftime("%m/%d %H:%M") + " ～ " + end_time.strftime(
-                "%m/%d %H:%M") + "\n" + d["rule_ex"]["name"] + "\n" + d["maps_ex"][0]["name"] + "\n" + d["maps_ex"][1]["name"] + "\n\n"
+                "%m/%d %H:%M") + "\n■" + d["rule_ex"]["name"] + "\n" + d["maps_ex"][0]["name"] + "\n" + d["maps_ex"][1]["name"] + "\n\n"
+        else:
+            schedule_all = schedule_all[:-2]
 
         line_bot_api.reply_message(
             event.reply_token, [
