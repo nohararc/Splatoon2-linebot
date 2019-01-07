@@ -8,6 +8,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImagemapSendMessage
 )
 
+
 def get_battle_stage(line_bot_api, event, rule):
     req = urllib.request.Request(
         "https://spla2.yuu26.com/{rule}/now".format(rule=rule))
@@ -29,6 +30,7 @@ def get_battle_stage(line_bot_api, event, rule):
                 ))
             ]
         )
+
 
 def get_specified_battle_stage(line_bot_api, event, rule, m):
     req = urllib.request.Request(
@@ -53,3 +55,27 @@ def get_specified_battle_stage(line_bot_api, event, rule, m):
                         ))
                     ]
                 )
+
+
+def get_battle_stage_all(line_bot_api, event, rule):
+    req = urllib.request.Request(
+        "https://spla2.yuu26.com/{rule}/schedule".format(rule=rule))
+    req.add_header("user-agent", "@nohararc")
+    with urllib.request.urlopen(req) as res:
+        response_body = res.read().decode("utf-8")
+        response_json = json.loads(response_body.split("\n")[0])
+        data = response_json["result"]
+        schedule_all = ""
+
+        for d in data:
+            start_time = datetime.strptime(d["start"], '%Y-%m-%dT%H:%M:%S')
+            end_time = datetime.strptime(d["end"], '%Y-%m-%dT%H:%M:%S')
+
+            schedule_all += start_time.strftime("%m/%d %H:%M") + " ～ " + end_time.strftime(
+                "%m/%d %H:%M") + "\n" + d["rule_ex"]["name"] + "\n" + d["maps_ex"][0]["name"] + "\n" + d["maps_ex"][1]["name"] + "\n\n"
+
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text=schedule_all)
+            ]
+        )

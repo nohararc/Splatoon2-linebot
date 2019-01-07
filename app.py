@@ -132,6 +132,18 @@ def handle_message(event):
         rule = "league"
         battle_stage.get_battle_stage(line_bot_api, event, rule)
 
+    elif re.fullmatch(r'(レギュラーマッチ|ナワバリ)(オール|一覧|全部|ぜんぶ)', text):
+        rule = "regular"
+        battle_stage.get_battle_stage_all(line_bot_api, event, rule)
+
+    elif re.fullmatch(r'(ガチマッチ|ガチマ)(オール|一覧|全部|ぜんぶ)', text):
+        rule = "gachi"
+        battle_stage.get_battle_stage_all(line_bot_api, event, rule)
+
+    elif re.fullmatch(r'(リーグマッチ|リグマ)(オール|一覧|全部|ぜんぶ)', text):
+        rule = "league"
+        battle_stage.get_battle_stage_all(line_bot_api, event, rule)
+
     elif m_league is not None:
         rule = "league"
         battle_stage.get_specified_battle_stage(

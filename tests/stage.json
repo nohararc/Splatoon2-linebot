@@ -41,6 +41,27 @@
         "type": "text",
         "text": "ナワバリ21"
       }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ナワバリオール"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "ガチマオール"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "リグマオール"
+      }
     }
   ]
 }

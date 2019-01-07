@@ -13,6 +13,7 @@ from linebot.models import (
 
 import app
 
+
 class TestSalmon(unittest.TestCase):
 
     file_dir = os.path.dirname(__file__)
@@ -31,11 +32,14 @@ class TestSalmon(unittest.TestCase):
     def test_salmon(self):
         app.handle_message(self.events[0])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r'(オープン！|クローズ！)\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
+        self.assertRegex(
+            textsendmessage[0].text, r'(オープン！|クローズ！)\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
 
         app.handle_message(self.events[1])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r'(オープン！|クローズ！)\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
+        self.assertRegex(
+            textsendmessage[0].text, r'(オープン！|クローズ！)\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
+
 
 class TestRandom(unittest.TestCase):
 
@@ -55,7 +59,8 @@ class TestRandom(unittest.TestCase):
     def test_random_rule(self):
         app.handle_message(self.events[0])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"(ナワバリ)|(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)")
+        self.assertRegex(textsendmessage[0].text,
+                         r"(ナワバリ)|(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)")
 
     def test_random_weapon(self):
         app.handle_message(self.events[1])
@@ -66,6 +71,7 @@ class TestRandom(unittest.TestCase):
         app.handle_message(self.events[2])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
         self.assertRegex(textsendmessage[0].text, r"ブキ: .+\nサブ: .+\nスペシャル: .+")
+
 
 class TestStage(unittest.TestCase):
 
@@ -85,28 +91,51 @@ class TestStage(unittest.TestCase):
     def test_stage(self):
         app.handle_message(self.events[0])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
 
         app.handle_message(self.events[1])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
 
         app.handle_message(self.events[2])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\nナワバリバトル\n.+\n.+")
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\nナワバリバトル\n.+\n.+")
 
     def test_stage_time_oddnum(self):
         app.handle_message(self.events[3])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
 
         app.handle_message(self.events[4])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
 
         app.handle_message(self.events[5])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\nナワバリバトル\n.+\n.+")
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\nナワバリバトル\n.+\n.+")
+
+    def test_stage_all(self):
+        app.handle_message(self.events[6])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\nナワバリバトル\n.+\n.+")
+
+        app.handle_message(self.events[7])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+
+        app.handle_message(self.events[8])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(
+            textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+\n.+")
+
 
 class TestWeapon(unittest.TestCase):
 
@@ -126,7 +155,8 @@ class TestWeapon(unittest.TestCase):
     def test_weapon(self):
         app.handle_message(self.events[0])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"ブキ: スプラシューターコラボ\nサブ: スプラッシュボム\nスペシャル: ジェットパック")
+        self.assertRegex(
+            textsendmessage[0].text, r"ブキ: スプラシューターコラボ\nサブ: スプラッシュボム\nスペシャル: ジェットパック")
 
 
 class TestBrand(unittest.TestCase):
@@ -147,12 +177,14 @@ class TestBrand(unittest.TestCase):
     def test_brand_to_gear(self):
         app.handle_message(self.events[0])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"ブランド: .+\n付きやすい: .+\n付きにくい: .+")
+        self.assertRegex(textsendmessage[0].text,
+                         r"ブランド: .+\n付きやすい: .+\n付きにくい: .+")
 
     def test_gear_to_brand(self):
         app.handle_message(self.events[1])
         _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
-        self.assertRegex(textsendmessage[0].text, r"ギア: .+\n付きやすい: .+\n付きにくい: .+")
+        self.assertRegex(textsendmessage[0].text,
+                         r"ギア: .+\n付きやすい: .+\n付きにくい: .+")
 
     def test_brand_name(self):
         app.handle_message(self.events[2])
