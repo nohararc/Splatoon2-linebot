@@ -136,6 +136,12 @@ class TestStage(unittest.TestCase):
         self.assertRegex(
             textsendmessage[0].text, r"(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(■ガチ)(ヤグラ|ホコバトル|エリア|アサリ)\n.+")
 
+    def test_rule_next(self):
+        app.handle_message(self.events[9])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(
+            textsendmessage[0].text, r"■ガチマッチ\n(\d{2}/\d{2} \d{2}:\d{2}) ～")
+
 
 class TestWeapon(unittest.TestCase):
 

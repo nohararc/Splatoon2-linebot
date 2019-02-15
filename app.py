@@ -116,6 +116,7 @@ def handle_message(event):
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
     m_regular = re.fullmatch(r'(?:レギュラーマッチ|ナワバリ)(\d+)(時)?', text)
     m_random_buki = re.fullmatch(r'(?:ブキランダム|ランダムブキ) (?P<genre>.+)', text)
+    m_rule = re.fullmatch(r'(?:次の)(?P<rule>エリア|ホコ|ヤグラ|アサリ)', text)
 
     if re.fullmatch(r'サーモンラン|バイト', text):
         salmon.salmon(line_bot_api, event)
@@ -143,6 +144,30 @@ def handle_message(event):
     elif re.fullmatch(r'(リーグマッチ|リグマ)(オール|一覧|全部|ぜんぶ)', text):
         rule = "league"
         battle_stage.get_battle_stage_all(line_bot_api, event, rule)
+
+    elif m_rule is not None:
+        req = urllib.request.Request("https://spla2.yuu26.com/schedule")
+        req.add_header("user-agent", "@nohararc")
+        with urllib.request.urlopen(req) as res:
+            response_body = res.read().decode("utf-8")
+            response_json = json.loads(response_body.split("\n")[0])
+            data = response_json["result"]
+
+        stage = ["■ガチマッチ"]
+        for d in data["gachi"]:
+            if "ガチ" + m_rule.group("rule") in d["rule"]:
+                start_time = datetime.strptime(d["start"], '%Y-%m-%dT%H:%M:%S')
+                stage += [start_time.strftime("%m/%d %H:%M") + " ～", d["maps_ex"][0]["name"], d["maps_ex"][1]["name"], ""]
+        stage += ["■リーグマッチ"]
+        for d in data["league"]:
+            if "ガチ" + m_rule.group("rule") in d["rule"]:
+                start_time = datetime.strptime(d["start"], '%Y-%m-%dT%H:%M:%S')
+                stage += [start_time.strftime("%m/%d %H:%M") + " ～", d["maps_ex"][0]["name"], d["maps_ex"][1]["name"], ""]
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="{stage}".format(stage="\n".join(stage)[:-1]))
+            ]
+        )
 
     elif m_league is not None:
         rule = "league"

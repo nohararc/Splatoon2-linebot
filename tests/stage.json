@@ -62,6 +62,13 @@
         "type": "text",
         "text": "リグマオール"
       }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "次のエリア"
+      }
     }
   ]
 }
