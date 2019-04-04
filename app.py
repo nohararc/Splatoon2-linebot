@@ -199,7 +199,7 @@ def handle_message(event):
 
         # 条件に合うブキ一覧を取得
         cur.execute(
-            'select name from weapons where ? in (sub, sub_short1, sub_short2, sub_short3)', (text, ))
+            'select name from weapons where ? in (sub, sub_short1, sub_short2, sub_short3)', (sub, ))
         res = cur.fetchall()
         names = [flatten for inner in res for flatten in inner]
         buki.get_weapons(line_bot_api, event, sub, *names)
@@ -212,7 +212,7 @@ def handle_message(event):
 
         # 条件に合うブキ一覧を取得
         cur.execute(
-            'select name from weapons where ? in (special, special_short1, special_short2, special_short3)', (text, ))
+            'select name from weapons where ? in (special, special_short1, special_short2, special_short3)', (special, ))
         res = cur.fetchall()
         names = [flatten for inner in res for flatten in inner]
         buki.get_weapons(line_bot_api, event, special, *names)
