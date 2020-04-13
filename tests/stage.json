@@ -69,6 +69,13 @@
         "type": "text",
         "text": "次のエリア"
       }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "リグマ23～1"
+      }
     }
   ]
 }

@@ -111,12 +111,14 @@ def handle_message(event):
     text = event.message.text
 
     app.logger.info(text)
+    print(text)
 
     m_league = re.fullmatch(r'(?:リーグマッチ|リグマ)(\d+)(時)?', text)
     m_gachi = re.fullmatch(r'(?:ガチマッチ|ガチマ)(\d+)(時)?', text)
     m_regular = re.fullmatch(r'(?:レギュラーマッチ|ナワバリ)(\d+)(時)?', text)
     m_random_buki = re.fullmatch(r'(?:ブキランダム|ランダムブキ) (?P<genre>.+)', text)
     m_rule = re.fullmatch(r'(?:次の)(?P<rule>エリア|ホコ|ヤグラ|アサリ)', text)
+    m_time_range = re.fullmatch(r'(?P<rule>ガチマッチ|ガチマ|リーグマッチ|リグマ)(?P<hours>\d+(?P<sep>-|～)\d+)', text)
 
     if re.fullmatch(r'サーモンラン|バイト', text):
         salmon.salmon(line_bot_api, event)
@@ -335,6 +337,9 @@ def handle_message(event):
                     text="{brand_name}".format(brand_name=brand_name))
             ]
         )
+
+    elif m_time_range:
+        battle_stage.get_stage_time_range(line_bot_api, event, m_time_range)
 
 
 if __name__ == "__main__":

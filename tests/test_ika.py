@@ -142,6 +142,12 @@ class TestStage(unittest.TestCase):
         self.assertRegex(
             textsendmessage[0].text, r"■ガチマッチ\n(\d{2}/\d{2} \d{2}:\d{2}) ～")
 
+    def test_stage_time_range(self):
+        app.handle_message(self.events[10])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(
+            textsendmessage[0].text, r"\d{2}/\d{2} \d{2}:\d{2}\n")
+
 
 class TestWeapon(unittest.TestCase):
 
