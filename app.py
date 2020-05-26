@@ -8,10 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImagemapSendMessage
-)
-from linebot.models.imagemap import (
-    BaseSize, ImagemapArea, URIImagemapAction, MessageImagemapAction, ImagemapArea
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImagemapSendMessage, MessageAction, QuickReply, QuickReplyButton
 )
 import sys
 import os
@@ -337,6 +334,30 @@ def handle_message(event):
                     text="{brand_name}".format(brand_name=brand_name))
             ]
         )
+    
+    elif re.fullmatch(r'サブ', text):
+        line_bot_api.reply_message(
+            event.reply_token, 
+            TextSendMessage(text='一覧から選んでね',
+                    quick_reply=QuickReply(items=[
+                        QuickReplyButton(action=MessageAction(label="スプラッシュボム", text="スプラッシュボム")),
+                        QuickReplyButton(action=MessageAction(label="ポイントセンサー", text="ポイントセンサー")),
+                        QuickReplyButton(action=MessageAction(label="ポイズンミスト", text="ポイズンミスト")),
+                        QuickReplyButton(action=MessageAction(label="キューバンボム", text="キューバンボム")),
+                        QuickReplyButton(action=MessageAction(label="カーリングボム", text="カーリングボム")),
+                        QuickReplyButton(action=MessageAction(label="スプリンクラー", text="スプリンクラー")),
+                        QuickReplyButton(action=MessageAction(label="クイックボム", text="クイックボム")),
+                        QuickReplyButton(action=MessageAction(label="ロボットボム", text="ロボットボム")),
+                        QuickReplyButton(action=MessageAction(label="ジャンプビーコン", text="ジャンプビーコン")),
+                        QuickReplyButton(action=MessageAction(label="スプラッシュシールド", text="スプラッシュシールド")),
+                        QuickReplyButton(action=MessageAction(label="トラップ", text="トラップ")),
+                        QuickReplyButton(action=MessageAction(label="タンサンボム", text="タンサンボム")),
+                        QuickReplyButton(action=MessageAction(label="トーピード", text="トーピード")),
+                    ])
+            )
+        )
+
+
 
     elif m_time_range:
         battle_stage.get_stage_time_range(line_bot_api, event, m_time_range)
