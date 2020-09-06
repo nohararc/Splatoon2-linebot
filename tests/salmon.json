@@ -13,6 +13,20 @@
         "type": "text",
         "text": "バイト"
       }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "サーモンラン次"
+      }
+    },
+    {
+      "type": "message",
+      "message": {
+        "type": "text",
+        "text": "バイトつぎ"
+      }
     }
   ]
 }

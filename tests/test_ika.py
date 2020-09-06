@@ -40,6 +40,17 @@ class TestSalmon(unittest.TestCase):
         self.assertRegex(
             textsendmessage[0].text, r'(オープン！|クローズ！)\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
 
+    def test_salmon_next(self):
+        app.handle_message(self.events[2])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(
+            textsendmessage[0].text, r'つぎ\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
+
+        app.handle_message(self.events[3])
+        _, textsendmessage = app.line_bot_api.reply_message.call_args[0]
+        self.assertRegex(
+            textsendmessage[0].text, r'つぎ\n(\d{2}/\d{2} \d{2}:\d{2}) ～ (\d{2}/\d{2} \d{2}:\d{2})\n(.+)')
+
 
 class TestRandom(unittest.TestCase):
 

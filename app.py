@@ -120,6 +120,9 @@ def handle_message(event):
     if re.fullmatch(r'サーモンラン|バイト', text):
         salmon.salmon(line_bot_api, event)
 
+    elif re.fullmatch(r'(サーモンラン|バイト)(次|つぎ)', text):
+        salmon.salmon_next(line_bot_api, event)
+
     elif re.fullmatch(r'レギュラーマッチ|ナワバリ', text):
         rule = "regular"
         battle_stage.get_battle_stage(line_bot_api, event, rule)
